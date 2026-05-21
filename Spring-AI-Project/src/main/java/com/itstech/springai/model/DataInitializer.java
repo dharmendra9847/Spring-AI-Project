@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.TextReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -23,6 +24,16 @@ public class DataInitializer {
 
     @PostConstruct
     public void initData() {
+
+        // Check if data already exists
+        List<Document> existing = vectorStore.similaritySearch(
+                SearchRequest.builder().query("product").topK(1).build()
+        );
+        if (!existing.isEmpty()) {
+            System.out.println("Vector store already populated, skipping data load.");
+            return;
+        }
+
         TextReader textReader =
                 new TextReader(
                     new ClassPathResource("product_details.txt"));
