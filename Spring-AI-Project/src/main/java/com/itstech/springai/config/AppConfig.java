@@ -16,8 +16,8 @@ public class AppConfig {
 //        return PgVectorStore.builder(jdbcTemplate, embeddingModel).build();
 //    }
 
-    @Bean
-    public PgVectorStore pgvectorStore(JdbcTemplate jdbcTemplate, EmbeddingModel embeddingModel) {
-        return PgVectorStore.builder(jdbcTemplate, embeddingModel).build();
-    }
+//    @Bean
+//    public PgVectorStore pgvectorStore(JdbcTemplate jdbcTemplate, EmbeddingModel embeddingModel) {
+//        return PgVectorStore.builder(jdbcTemplate, embeddingModel).build();
+//    }
 }
